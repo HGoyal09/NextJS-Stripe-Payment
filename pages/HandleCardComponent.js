@@ -6,7 +6,13 @@ class HandleSelectedCard extends Component{
   constructor(props) {
     super(props);
     this.handleDelete = this.handleDelete.bind(this);
+    this.pay = this.pay.bind(this);
   }
+
+  pay = async () => {
+    const id = this.props.selectedCard.id;
+    await axios.post("/api/useCard", {id});
+  };
 
   handleDelete = async () => {
     const id = this.props.selectedCard.id;
@@ -21,6 +27,7 @@ class HandleSelectedCard extends Component{
             <div>Last 4 digit = {this.props.selectedCard.card.last4}</div>
             <div>Expiry = {this.props.selectedCard.card.exp_year}</div>
             <Button onClick={this.handleDelete}>Delete Card</Button>
+            <Button onClick={this.pay}>Pay using this card</Button>
           </div>
       )
     } else {
