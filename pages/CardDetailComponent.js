@@ -45,7 +45,7 @@ class RenderCard extends Component {
             <Row className="form-group">
               <Col md={{size: 10, offset: 2}}>
                 <Button type="submit" color="primary">
-                  Update
+                  Use Card
                 </Button>
               </Col>
             </Row>
