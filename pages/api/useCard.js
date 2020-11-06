@@ -3,18 +3,20 @@ const stripe = new Stripe("sk_test_51Hh0EWHXCFaKJwPe8lUja4nUIX0HuSVrmpQNKzcUlP7B
 
 export default async (req, res) => {
   const { id } = req.body;
+
   const customer = await stripe.customers.retrieve('cus_IHb5honXATiqxV');
+
   try {
-    await stripe.paymentIntents.create({
+    const paymentIntent = await stripe.paymentIntents.create({
       amount: 100,
       currency: "USD",
       description: "Delicious success",
       payment_method: id,
-      customer: customer.id,
-      confirm: true
+      customer: customer.id
     });
 
     return res.status(200).json({
+      pm: paymentIntent,
       confirm: "abc1234"
     });
   }
