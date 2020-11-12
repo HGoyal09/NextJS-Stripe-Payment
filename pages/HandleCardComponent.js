@@ -90,7 +90,8 @@ class HandleSelectedCard extends Component{
           <div>
             <h2>Selected Card:</h2>
             <div>Last 4 digit = {this.props.selectedCard.card.last4}</div>
-            <div>Expiry = {this.props.selectedCard.card.exp_year}</div>
+            <div>Expiry year = {this.props.selectedCard.card.exp_year}</div>
+            <div>Expiry month = {this.props.selectedCard.card.exp_month}</div>
             <Button onClick={this.updateCard}>Update Card</Button>
             <Button onClick={this.handleDelete}>Delete Card</Button>
             <Button onClick={this.pay}>Pay using this card</Button>
