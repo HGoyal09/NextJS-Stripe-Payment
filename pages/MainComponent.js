@@ -10,7 +10,8 @@ import axios from 'axios';
 
 import RenderCard from "./CardDetailComponent";
 
-const stripePromise = loadStripe('pk_test_51Hh0EWHXCFaKJwPeFxcpLt5Wm7iLZVsIKmPh1ZIzd7ekrqN5mMpUgKeATeZ9GaU9A4zHI9J6nNl3onwWTGQd1egW00b9iowpNO');
+const stripePromise = loadStripe('pk_test_51HhIrQGYLekXlSfFoq0VioSiNsaLhVFWDq82ZGTVNLg2DliQXqKnKqIovEwcax5k0v8OvNOrpQ6sgpg0F9cVF4Hk004u3tIxZv');
+
 
 const paymentIds = new Array(2);
 
@@ -69,8 +70,6 @@ class Main extends Component {
       console.log(error);
     }
   };
-
-
 
   getCardDetails = async (event) => {
     event.preventDefault();

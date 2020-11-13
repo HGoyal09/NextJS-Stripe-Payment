@@ -5,10 +5,13 @@ const stripe = new Stripe('sk_test_51HhIrQGYLekXlSfFj2MTBJmzeVRcHJ2ZJv5mGoAiGgeW
 export default async (req, res) => {
 
   const { id } = req.body;
+  const customer = await stripe.customers.retrieve('cus_IMql7wAKAamZEr');
+  let paymentIntent;
 
   try {
     const paymentMethod = await stripe.paymentMethods.create({
-      payment_method: id
+      payment_method: id,
+      customer: customer.id
     }, {
       stripeAccount: 'acct_1Ga2f6HlzzKvaOuE'
     });
@@ -18,7 +21,9 @@ export default async (req, res) => {
     }
     else {
 
-      const paymentIntent = await stripe.paymentIntents.create({
+      console.log("clonedPaymentMethod = " + JSON.stringify(paymentMethod));
+
+      paymentIntent = await stripe.paymentIntents.create({
         amount: 100,
         currency: "USD",
         description: "POC test",
@@ -36,7 +41,8 @@ export default async (req, res) => {
     }
 
     return res.status(200).json({
-      confirm: "abc123"
+      confirm: "abc123",
+      pm: paymentIntent
     });
   } catch (error) {
     console.log(error);

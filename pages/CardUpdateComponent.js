@@ -3,8 +3,6 @@ import axios from "axios";
 import {Control, LocalForm} from "react-redux-form";
 import {Button, Col, Row} from "reactstrap";
 
-
-
 const UpdateForm = ({selectedCard}) => {
 
   const handleSubmit = async values => {

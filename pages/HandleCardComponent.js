@@ -5,8 +5,7 @@ import UpdateCard from "./CardUpdateComponent";
 import {CardCvcElement, Elements, useElements, useStripe} from "@stripe/react-stripe-js";
 import {loadStripe} from "@stripe/stripe-js";
 
-const stripePromise = loadStripe('pk_test_51Hh0EWHXCFaKJwPeFxcpLt5Wm7iLZVsIKmPh1ZIzd7ekrqN5mMpUgKeATeZ9GaU9A4zHI9J6nNl3onwWTGQd1egW00b9iowpNO');
-
+const stripePromise = loadStripe('pk_test_51HhIrQGYLekXlSfFoq0VioSiNsaLhVFWDq82ZGTVNLg2DliQXqKnKqIovEwcax5k0v8OvNOrpQ6sgpg0F9cVF4Hk004u3tIxZv');
 
 const CvcElement = ({selectedCard}) => {
   const stripe = useStripe();
@@ -31,13 +30,27 @@ const CvcElement = ({selectedCard}) => {
       }
   };
 
+
+  const handleSubmitConnect = async event => {
+    event.preventDefault();
+    try {
+      await axios.post("/api/savedCardChargeConnectAccount", {id: selectedCard.id});
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
       <div>
-        <form onSubmit={handleSubmit}>
+        <form>
             <CardCvcElement/>
-            <button type="submit" disabled={!stripe}>
+            <button type="submit" disabled={!stripe} onClick={handleSubmit}>
               Make Payment
             </button>
+
+          <button type="submit" disabled={!stripe} onClick={handleSubmitConnect}>
+            Pay connect account
+          </button>
         </form>
       </div>
   )};

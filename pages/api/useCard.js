@@ -1,16 +1,16 @@
 import Stripe from 'stripe';
-const stripe = new Stripe("sk_test_51Hh0EWHXCFaKJwPe8lUja4nUIX0HuSVrmpQNKzcUlP7BuKnt63Drr5Ql8z50rVuBSrdncr4ijvxH0lHBYR9LS9RV00gWbjtxuY");
+const stripe = new Stripe('sk_test_51HhIrQGYLekXlSfFj2MTBJmzeVRcHJ2ZJv5mGoAiGgeWv99Vc3dcMOc910qsxNt7t0EpSVdDvwbyVcPsbX7TClVQ00dj424ylF');
 
 export default async (req, res) => {
   const { id } = req.body;
 
-  const customer = await stripe.customers.retrieve('cus_IHb5honXATiqxV');
+  const customer = await stripe.customers.retrieve('cus_IMql7wAKAamZEr');
 
   try {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: 100,
       currency: "USD",
-      description: "Delicious success",
+      description: "POC test",
       payment_method: id,
       customer: customer.id
     });
