@@ -10,7 +10,7 @@ import axios from 'axios';
 
 import RenderCard from "./CardDetailComponent";
 
-const stripePromise = loadStripe('pk_test_51HhIrQGYLekXlSfFoq0VioSiNsaLhVFWDq82ZGTVNLg2DliQXqKnKqIovEwcax5k0v8OvNOrpQ6sgpg0F9cVF4Hk004u3tIxZv');
+const stripePromise = loadStripe('pk_test_key');
 
 
 const paymentIds = new Array(2);

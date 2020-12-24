@@ -5,7 +5,7 @@ import UpdateCard from "./CardUpdateComponent";
 import {CardCvcElement, Elements, useElements, useStripe} from "@stripe/react-stripe-js";
 import {loadStripe} from "@stripe/stripe-js";
 
-const stripePromise = loadStripe('pk_test_51HhIrQGYLekXlSfFoq0VioSiNsaLhVFWDq82ZGTVNLg2DliQXqKnKqIovEwcax5k0v8OvNOrpQ6sgpg0F9cVF4Hk004u3tIxZv');
+const stripePromise = loadStripe('pk_test_key');
 
 const CvcElement = ({selectedCard}) => {
   const stripe = useStripe();
@@ -34,7 +34,17 @@ const CvcElement = ({selectedCard}) => {
   const handleSubmitConnect = async event => {
     event.preventDefault();
     try {
-      await axios.post("/api/savedCardChargeConnectAccount", {id: selectedCard.id});
+      const paymentIntent = await axios.post("/api/savedCardChargeConnectAccount", {id: selectedCard.id});
+
+      await stripe.confirmCardPayment(
+          paymentIntent.data.pm.client_secret, {
+            payment_method_options: {
+              card: {
+                cvc: elements.getElement(CardCvcElement)
+              }
+            }
+          }
+      );
     } catch (error) {
       console.log(error);
     }
